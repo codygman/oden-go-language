@@ -17,6 +17,9 @@ data InterfaceMethodSpec = Method Identifier Parameters Returns
                          | Embed Identifier
                          deriving (Show, Eq)
 
+newtype KeyType = KeyType Type deriving (Eq,Show)
+newtype ElementType = ElementType Type deriving (Eq,Show)
+
 data Type = Basic Identifier Bool
           | Pointer Type
           | Array Int Type
@@ -25,5 +28,6 @@ data Type = Basic Identifier Bool
           | Struct [StructField]
           | Named String Identifier Type
           | Interface [InterfaceMethodSpec]
+          | Map KeyType ElementType 
           | Unsupported String                        -- Temporary solution for the Importer.
           deriving (Show, Eq)

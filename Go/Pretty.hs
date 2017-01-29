@@ -12,6 +12,8 @@ import           Numeric
 import           Text.PrettyPrint.Leijen
 import           Text.Regex.PCRE.Heavy
 
+pp x = displayS (renderPretty 0.4 100 (pretty x)) ""
+
 indentedInBraces :: Doc -> Doc
 indentedInBraces d = vcat [lbrace, indent 4 d, rbrace]
 
@@ -66,6 +68,7 @@ instance Pretty Type where
   pretty (Named _ name _) = pretty name
   pretty (Interface []) = text "interface{}"
   pretty (Interface methods) = text "interface" <+> indentedInBraces (vcat (map pretty methods))
+  pretty (Map (KeyType keyTy) (ElementType elTy)) = hcat [text "map", brackets(pretty keyTy), pretty elTy]
   pretty (Unsupported s) = error ("Cannot pretty print unsupported: " ++ s)
 
 showGoString :: Show a => a -> String
