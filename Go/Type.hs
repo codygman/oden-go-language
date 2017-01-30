@@ -28,6 +28,6 @@ data Type = Basic Identifier Bool
           | Struct [StructField]
           | Named String Identifier Type
           | Interface [InterfaceMethodSpec]
-          | Map KeyType ElementType 
+          | Map KeyType ElementType
           | Unsupported String                        -- Temporary solution for the Importer.
           deriving (Show, Eq)
